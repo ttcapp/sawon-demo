@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:slide_drawer/slide_drawer.dart';
 void main() {
   runApp(MyApp());
 }
@@ -9,10 +9,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
-    double width=MediaQuery.of(context).size.width;
+
     return MaterialApp(
-      home: MyHomePage(),
+      home: SlideDrawer(
+        offsetFromRight: 300,
+        duration: Duration(milliseconds: 4000),
+        headDrawer: Container(
+          height: 150,
+        ),
+        items: [
+          MenuItem('Home',
+              icon: Icons.ac_unit,
+              onTap: (){}),
+          MenuItem('Project',
+              icon: Icons.ac_unit,
+              onTap: (){}),
+          MenuItem('Favourite',
+              icon: Icons.ac_unit,
+              onTap: (){}),
+          MenuItem('Profile',
+              icon: Icons.ac_unit,
+              onTap: (){}),
+          MenuItem('Setting',
+              icon: Icons.ac_unit,
+              onTap: (){}),
+        ],
+        child:MyHomePage (),
+      ),
     );
   }
 }
@@ -30,6 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
     double width=MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          // call toggle from SlideDrawer to alternate between open and close
+          // when pressed menu button
+          onPressed: () => SlideDrawer.of(context)!.toggle(),
+        ),
         centerTitle: true,
         title: Text("First App"),
       ),
